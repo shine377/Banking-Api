@@ -2,6 +2,7 @@ import { DataSource } from "typeorm";
 import express from "express"
 import { User } from "./dataEntities/User";
 import { createUserRouter } from "./routs/create_user";
+import { Transaction } from "./dataEntities/transaction";
 
 const app = express()
 
@@ -14,14 +15,14 @@ const main = async () =>{
        username: "postgres",
        password: "Chlt*377",
        database: "postgres",
-       entities:[User],
+       entities:[User,Transaction],
        synchronize:true
    })
    console.log('connected to db');
    app.use(express.json())
    app.use(createUserRouter)
 
-   app.listen(80, () =>{
+   app.listen(8080, () =>{
     console.log('running on port 8080');
     
    })

@@ -1,6 +1,7 @@
-import { Entity, BaseEntity, Column, PrimaryColumn } from "typeorm";
+import { Entity, BaseEntity, Column, PrimaryColumn, OneToMany } from "typeorm";
+import { Transaction } from "./transaction";
 
-@Entity("newUser")
+@Entity("user")
 export class User extends BaseEntity {
 
   @PrimaryColumn({
@@ -21,4 +22,11 @@ export class User extends BaseEntity {
     type: "numeric",
   })
   balance!: number;
+
+  @OneToMany(
+    () => Transaction,
+    transaction => transaction.user
+  )
+
+  transaction! : Transaction[]
 }
